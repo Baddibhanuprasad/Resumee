@@ -6,15 +6,12 @@
     <title>Bhanu Prasad | Cybersecurity Engineer</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700;14..32,800;14..32,900&family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700;14..32,800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
     <style>
-        /* ============================================================
-                   RESET & BASE
-                   ============================================================ */
+        /* --- Reset & Base --- */
         * {
             margin: 0;
             padding: 0;
@@ -22,59 +19,39 @@
         }
         html {
             scroll-behavior: smooth;
-            scrollbar-width: thin;
-            scrollbar-color: #f43f5e #0a0a0f;
         }
         body {
             background: #05050A;
             color: #e2e8f0;
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
-            cursor: default;
         }
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 6px;
         }
         ::-webkit-scrollbar-track {
-            background: #0a0a0f;
-            border-radius: 10px;
+            background: #05050A;
         }
         ::-webkit-scrollbar-thumb {
             background: linear-gradient(180deg, #f43f5e, #8b5cf6);
             border-radius: 10px;
-            border: 2px solid #0a0a0f;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(180deg, #fb7185, #a78bfa);
         }
 
-        /* ============================================================
-                   TYPOGRAPHY
-                   ============================================================ */
+        /* --- Typography --- */
         .font-mono {
             font-family: 'JetBrains Mono', monospace;
         }
-        .font-orbitron {
-            font-family: 'Orbitron', sans-serif;
-        }
         .gradient-text {
-            background: linear-gradient(135deg, #f43f5e, #8b5cf6, #3b82f6, #06b6d4);
-            background-size: 300% 300%;
+            background: linear-gradient(135deg, #f43f5e, #8b5cf6, #3b82f6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: gradient-shift 6s ease-in-out infinite;
         }
         .glow-text {
-            text-shadow: 0 0 40px rgba(244, 63, 94, 0.3), 0 0 80px rgba(139, 92, 246, 0.15), 0 0 120px rgba(59, 130, 246, 0.08);
-        }
-        .glow-text-white {
-            text-shadow: 0 0 30px rgba(255, 255, 255, 0.05), 0 0 60px rgba(255, 255, 255, 0.02);
+            text-shadow: 0 0 40px rgba(244, 63, 94, 0.3), 0 0 80px rgba(139, 92, 246, 0.1);
         }
 
-        /* ============================================================
-                   GLASSMORPHISM
-                   ============================================================ */
+        /* --- Glassmorphism --- */
         .glass {
             background: rgba(255, 255, 255, 0.02);
             backdrop-filter: blur(16px);
@@ -86,89 +63,36 @@
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.06);
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
         }
         .glass-card:hover {
             transform: translateY(-8px) scale(1.01);
             border-color: rgba(244, 63, 94, 0.3);
-            box-shadow: 0 25px 60px -12px rgba(244, 63, 94, 0.15), 0 0 40px rgba(139, 92, 246, 0.05);
-        }
-        .glass-card-glow {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-            position: relative;
-            overflow: hidden;
-        }
-        .glass-card-glow::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at center, rgba(244, 63, 94, 0.05), transparent 70%);
-            opacity: 0;
-            transition: opacity 0.6s ease;
-            pointer-events: none;
-        }
-        .glass-card-glow:hover::before {
-            opacity: 1;
-        }
-        .glass-card-glow:hover {
-            transform: translateY(-10px) scale(1.02);
-            border-color: rgba(244, 63, 94, 0.25);
-            box-shadow: 0 30px 80px -15px rgba(244, 63, 94, 0.2), 0 0 60px rgba(139, 92, 246, 0.08);
+            box-shadow: 0 25px 50px -12px rgba(244, 63, 94, 0.15);
         }
 
-        /* ============================================================
-                   KEYFRAME ANIMATIONS
-                   ============================================================ */
+        /* --- Custom Animations --- */
         @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
-            25% { transform: translateY(-15px) rotate(1deg) scale(1.02); }
-            75% { transform: translateY(10px) rotate(-1deg) scale(0.98); }
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-25px) rotate(2deg); }
         }
         @keyframes float-reverse {
-            0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
-            25% { transform: translateY(15px) rotate(-1deg) scale(0.98); }
-            75% { transform: translateY(-10px) rotate(1deg) scale(1.02); }
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(25px) rotate(-2deg); }
         }
         @keyframes pulse-ring {
-            0% { transform: scale(0.92); opacity: 0.5; }
-            50% { transform: scale(1.08); opacity: 0.15; }
-            100% { transform: scale(0.92); opacity: 0.5; }
-        }
-        @keyframes pulse-ring-fast {
             0% { transform: scale(0.95); opacity: 0.6; }
             50% { transform: scale(1.05); opacity: 0.2; }
             100% { transform: scale(0.95); opacity: 0.6; }
         }
         @keyframes morphing {
             0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-            25% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
-            50% { border-radius: 40% 60% 50% 50% / 40% 50% 60% 50%; }
-            75% { border-radius: 50% 30% 60% 70% / 50% 40% 60% 50%; }
+            50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
             100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
         }
-        @keyframes morphing-slow {
-            0% { border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%; }
-            33% { border-radius: 40% 60% 50% 50% / 30% 50% 60% 50%; }
-            66% { border-radius: 50% 40% 60% 50% / 50% 40% 50% 60%; }
-            100% { border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%; }
-        }
         @keyframes scanline {
-            0% { transform: translateY(-100%) scaleY(1); }
-            50% { transform: translateY(0%) scaleY(1.5); }
-            100% { transform: translateY(100%) scaleY(1); }
-        }
-        @keyframes scanline-fade {
-            0% { transform: translateY(-100%); opacity: 0; }
-            20% { opacity: 1; }
-            80% { opacity: 1; }
-            100% { transform: translateY(100%); opacity: 0; }
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
         }
         @keyframes typing {
             0% { width: 0; }
@@ -184,85 +108,18 @@
             100% { background-position: 0% 50%; }
         }
         @keyframes fade-in-up {
-            from { opacity: 0; transform: translateY(50px) scale(0.95); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-        @keyframes fade-in-down {
-            from { opacity: 0; transform: translateY(-30px); }
+            from { opacity: 0; transform: translateY(40px); }
             to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fade-in-left {
-            from { opacity: 0; transform: translateX(-40px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes fade-in-right {
-            from { opacity: 0; transform: translateX(40px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes scale-in {
-            from { opacity: 0; transform: scale(0.8); }
-            to { opacity: 1; transform: scale(1); }
-        }
-        @keyframes rotate-slow {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        @keyframes rotate-reverse-slow {
-            from { transform: rotate(360deg); }
-            to { transform: rotate(0deg); }
-        }
-        @keyframes shimmer {
-            0% { background-position: -200% center; }
-            100% { background-position: 200% center; }
-        }
-        @keyframes border-glow {
-            0%, 100% { border-color: rgba(244, 63, 94, 0.3); box-shadow: 0 0 20px rgba(244, 63, 94, 0.05); }
-            50% { border-color: rgba(139, 92, 246, 0.4); box-shadow: 0 0 40px rgba(139, 92, 246, 0.1); }
         }
         @keyframes hex-grid {
             0% { background-position: 0 0; }
-            100% { background-position: 80px 80px; }
-        }
-        @keyframes particle-float {
-            0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0.3; }
-            25% { transform: translateY(-20px) translateX(10px); opacity: 0.6; }
-            50% { transform: translateY(-10px) translateX(-10px); opacity: 0.4; }
-            75% { transform: translateY(15px) translateX(5px); opacity: 0.7; }
-        }
-        @keyframes glow-pulse {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 0.6; transform: scale(1.1); }
-        }
-        @keyframes text-reveal {
-            0% { clip-path: inset(0 100% 0 0); }
-            100% { clip-path: inset(0 0 0 0); }
-        }
-        @keyframes border-dance {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            100% { background-position: 60px 60px; }
         }
 
-        /* ============================================================
-                   UTILITY CLASSES
-                   ============================================================ */
         .animate-float { animation: float 8s ease-in-out infinite; }
         .animate-float-reverse { animation: float-reverse 8s ease-in-out infinite; }
         .animate-pulse-ring { animation: pulse-ring 4s ease-in-out infinite; }
-        .animate-pulse-ring-fast { animation: pulse-ring-fast 2.5s ease-in-out infinite; }
-        .animate-morphing { animation: morphing 14s ease-in-out infinite; }
-        .animate-morphing-slow { animation: morphing-slow 20s ease-in-out infinite; }
-        .animate-rotate-slow { animation: rotate-slow 20s linear infinite; }
-        .animate-rotate-reverse-slow { animation: rotate-reverse-slow 25s linear infinite; }
-        .animate-fade-in-up { animation: fade-in-up 0.8s ease forwards; }
-        .animate-fade-in-down { animation: fade-in-down 0.6s ease forwards; }
-        .animate-fade-in-left { animation: fade-in-left 0.7s ease forwards; }
-        .animate-fade-in-right { animation: fade-in-right 0.7s ease forwards; }
-        .animate-scale-in { animation: scale-in 0.6s ease forwards; }
-        .animate-shimmer { background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent); background-size: 200% 100%; animation: shimmer 3s infinite; }
-        .animate-border-glow { animation: border-glow 3s ease-in-out infinite; }
-        .animate-particle-float { animation: particle-float 6s ease-in-out infinite; }
-        .animate-glow-pulse { animation: glow-pulse 3s ease-in-out infinite; }
+        .animate-morphing { animation: morphing 12s ease-in-out infinite; }
         .typing-effect {
             display: inline-block;
             overflow: hidden;
@@ -271,255 +128,52 @@
             animation: typing 3.5s steps(40, end), blink 0.7s step-end infinite;
             width: 0;
         }
-        .section-divider {
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #f43f5e, #8b5cf6, #3b82f6, transparent);
-            opacity: 0.15;
-            position: relative;
-        }
-        .section-divider::after {
-            content: '';
-            position: absolute;
-            top: -3px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 7px;
-            background: linear-gradient(90deg, #f43f5e, #8b5cf6);
-            border-radius: 10px;
-            opacity: 0.3;
-            filter: blur(4px);
-        }
+        .fade-in-up { opacity: 0; animation: fade-in-up 0.8s ease forwards; }
 
-        /* ============================================================
-                   HERO PATTERN - HEXAGON GRID WITH GLOW
-                   ============================================================ */
+        /* --- Hero Pattern: Hexagon Grid --- */
         .hex-pattern {
-            position: relative;
-            background: 
-                radial-gradient(ellipse at 20% 50%, rgba(244, 63, 94, 0.06) 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 80%, rgba(139, 92, 246, 0.06) 0%, transparent 60%),
-                radial-gradient(ellipse at 50% 20%, rgba(59, 130, 246, 0.04) 0%, transparent 50%);
+            background-image: 
+                radial-gradient(circle at 30% 50%, rgba(244, 63, 94, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(139, 92, 246, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 50% 20%, rgba(59, 130, 246, 0.02) 0%, transparent 50%);
+            background-size: 100% 100%, 100% 100%, 100% 100%;
         }
         .hex-pattern::before {
             content: '';
             position: absolute;
             inset: 0;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cpath d='M40 0 L80 23.09 L80 69.09 L40 92.18 L0 69.09 L0 23.09 Z' fill='none' stroke='rgba(244,63,94,0.04)' stroke-width='0.5'/%3E%3Cpath d='M40 0 L80 23.09 L80 69.09 L40 92.18 L0 69.09 L0 23.09 Z' fill='none' stroke='rgba(139,92,246,0.03)' stroke-width='0.3' transform='translate(40,0)'/%3E%3C/svg%3E");
-            background-size: 80px 80px;
-            animation: hex-grid 30s linear infinite;
-            pointer-events: none;
-            opacity: 0.8;
-        }
-
-        /* ============================================================
-                   HERO PHOTO BORDER - NEW DESIGN
-                   ============================================================ */
-        .photo-frame {
-            position: relative;
-            padding: 6px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #f43f5e, #8b5cf6, #3b82f6, #06b6d4, #f43f5e);
-            background-size: 400% 400%;
-            animation: border-dance 6s ease-in-out infinite;
-            box-shadow: 0 0 60px rgba(244, 63, 94, 0.15), 0 0 120px rgba(139, 92, 246, 0.08), inset 0 0 60px rgba(244, 63, 94, 0.05);
-        }
-        .photo-frame::before {
-            content: '';
-            position: absolute;
-            inset: -15px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, rgba(244, 63, 94, 0.1), rgba(139, 92, 246, 0.05), transparent 70%);
-            animation: pulse-ring 3s ease-in-out infinite;
-            z-index: -1;
-        }
-        .photo-frame::after {
-            content: '';
-            position: absolute;
-            inset: -30px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 70% 70%, rgba(59, 130, 246, 0.06), rgba(6, 182, 212, 0.03), transparent 70%);
-            animation: pulse-ring 4s ease-in-out infinite 1s;
-            z-index: -2;
-        }
-        .photo-ring {
-            position: absolute;
-            inset: -8px;
-            border-radius: 50%;
-            border: 2px solid transparent;
-            border-top-color: rgba(244, 63, 94, 0.6);
-            border-right-color: rgba(139, 92, 246, 0.4);
-            animation: rotate-slow 8s linear infinite;
-        }
-        .photo-ring-reverse {
-            position: absolute;
-            inset: -16px;
-            border-radius: 50%;
-            border: 2px solid transparent;
-            border-bottom-color: rgba(59, 130, 246, 0.4);
-            border-left-color: rgba(6, 182, 212, 0.3);
-            animation: rotate-reverse-slow 10s linear infinite;
-        }
-        .photo-ring-dots {
-            position: absolute;
-            inset: -22px;
-            border-radius: 50%;
-            animation: rotate-slow 12s linear infinite;
-        }
-        .photo-ring-dots::before {
-            content: '●';
-            position: absolute;
-            top: -6px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: rgba(244, 63, 94, 0.5);
-            font-size: 8px;
-        }
-        .photo-ring-dots::after {
-            content: '●';
-            position: absolute;
-            bottom: -6px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: rgba(139, 92, 246, 0.5);
-            font-size: 8px;
-        }
-        .photo-glow-ring {
-            position: absolute;
-            inset: -40px;
-            border-radius: 50%;
-            background: radial-gradient(circle at center, rgba(244, 63, 94, 0.03), transparent 70%);
-            animation: glow-pulse 4s ease-in-out infinite;
-            pointer-events: none;
-        }
-        .photo-glow-ring-2 {
-            position: absolute;
-            inset: -60px;
-            border-radius: 50%;
-            background: radial-gradient(circle at center, rgba(139, 92, 246, 0.02), transparent 70%);
-            animation: glow-pulse 5s ease-in-out infinite 1s;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 0 L60 17.32 L60 51.96 L30 69.28 L0 51.96 L0 17.32 Z' fill='none' stroke='rgba(244,63,94,0.03)' stroke-width='0.5'/%3E%3C/svg%3E");
+            background-size: 60px 60px;
+            animation: hex-grid 20s linear infinite;
             pointer-events: none;
         }
 
-        /* ============================================================
-                   SKILLS SECTION - INTERACTIVE CARDS
-                   ============================================================ */
+        /* --- Skill Cards --- */
         .skill-card {
             cursor: pointer;
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-            position: relative;
-            overflow: hidden;
-        }
-        .skill-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(244, 63, 94, 0.05), rgba(139, 92, 246, 0.05));
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            border-radius: inherit;
-        }
-        .skill-card:hover::before {
-            opacity: 1;
+            transition: all 0.3s ease;
         }
         .skill-card.active {
-            border-color: rgba(244, 63, 94, 0.4);
-            box-shadow: 0 0 40px rgba(244, 63, 94, 0.08), 0 0 80px rgba(139, 92, 246, 0.04);
-            transform: scale(1.03) translateY(-4px);
+            border-color: rgba(244, 63, 94, 0.5);
+            box-shadow: 0 0 30px rgba(244, 63, 94, 0.1);
+            transform: scale(1.02);
         }
-        .skill-card .skill-icon {
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-        .skill-card:hover .skill-icon {
-            transform: scale(1.1) rotate(-5deg);
-        }
-        .skill-card.active .skill-icon {
-            transform: scale(1.15) rotate(0deg);
-            box-shadow: 0 0 30px rgba(244, 63, 94, 0.2);
-        }
-        .skill-card .skill-arrow {
-            transition: all 0.4s ease;
-        }
-        .skill-card:hover .skill-arrow {
-            transform: translateX(5px);
-            color: rgba(244, 63, 94, 0.6);
-        }
-        .skill-card.active .skill-arrow {
-            transform: translateX(8px) rotate(90deg);
-            color: rgba(244, 63, 94, 0.8);
-        }
-        .skill-card .skill-glow {
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at center, rgba(244, 63, 94, 0.03), transparent 70%);
-            opacity: 0;
-            transition: opacity 0.6s ease;
-            pointer-events: none;
-        }
-        .skill-card:hover .skill-glow {
-            opacity: 1;
-        }
-        .skill-card.active .skill-glow {
-            opacity: 0.5;
-        }
-
-        /* Skill Detail Panels */
         .skill-detail {
             display: none;
-            animation: fade-in-up 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-            transform-origin: top center;
+            animation: fade-in-up 0.5s ease forwards;
         }
         .skill-detail.active {
             display: block;
         }
-        .skill-detail .detail-icon {
-            animation: float 4s ease-in-out infinite;
-        }
-        .skill-detail .detail-list li {
-            opacity: 0;
-            animation: fade-in-right 0.5s ease forwards;
-        }
-        .skill-detail .detail-list li:nth-child(1) { animation-delay: 0.1s; }
-        .skill-detail .detail-list li:nth-child(2) { animation-delay: 0.2s; }
-        .skill-detail .detail-list li:nth-child(3) { animation-delay: 0.3s; }
 
-        /* ============================================================
-                   FLOATING PARTICLES
-                   ============================================================ */
-        .particle-container {
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            overflow: hidden;
-        }
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            border-radius: 50%;
-            background: rgba(244, 63, 94, 0.15);
-            animation: particle-float var(--duration) ease-in-out infinite;
-            animation-delay: var(--delay);
+        /* --- Section Divider --- */
+        .section-divider {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #f43f5e, #8b5cf6, transparent);
+            opacity: 0.2;
         }
 
-        /* ============================================================
-                   RESPONSIVE
-                   ============================================================ */
-        @media (max-width: 1024px) {
-            .photo-frame { padding: 4px; }
-            .photo-ring { display: none; }
-            .photo-ring-reverse { display: none; }
-            .photo-ring-dots { display: none; }
-            .photo-glow-ring { display: none; }
-            .photo-glow-ring-2 { display: none; }
-        }
         @media (max-width: 768px) {
             .typing-effect {
                 white-space: normal;
@@ -527,45 +181,19 @@
                 border-right: none;
                 width: 100%;
             }
-            .photo-frame { padding: 3px; }
-            .skill-card.active {
-                transform: scale(1.01) translateY(-2px);
-            }
-            .skill-detail {
-                margin-top: 20px;
-            }
-        }
-        @media (max-width: 480px) {
-            .hex-pattern::before {
-                background-size: 40px 40px;
-            }
         }
     </style>
 </head>
 <body>
 
     <!-- ===== 3D BACKGROUND ===== -->
-    <div id="three-container" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.10;"></div>
+    <div id="three-container" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.12;"></div>
 
-    <!-- ===== FLOATING PARTICLES ===== -->
-    <div class="particle-container" id="particles">
-        <div class="particle" style="top:10%;left:5%;--duration:6s;--delay:0s;"></div>
-        <div class="particle" style="top:20%;right:10%;--duration:7s;--delay:1s;"></div>
-        <div class="particle" style="bottom:30%;left:8%;--duration:5s;--delay:0.5s;"></div>
-        <div class="particle" style="bottom:20%;right:5%;--duration:8s;--delay:1.5s;"></div>
-        <div class="particle" style="top:50%;left:50%;--duration:9s;--delay:2s;"></div>
-        <div class="particle" style="top:70%;left:20%;--duration:6s;--delay:0.8s;"></div>
-        <div class="particle" style="top:40%;right:25%;--duration:7.5s;--delay:1.2s;"></div>
-        <div class="particle" style="bottom:60%;left:35%;--duration:5.5s;--delay:0.3s;"></div>
-    </div>
-
-    <!-- ================================================================ -->
     <!-- ===== NAVIGATION ===== -->
-    <!-- ================================================================ -->
     <nav id="navbar" class="fixed w-full top-0 z-50 transition-all duration-500 glass border-b border-white/5">
         <div class="container mx-auto px-4 sm:px-6">
             <div class="flex items-center justify-between h-16">
-                <a href="#" class="text-2xl font-bold tracking-tight font-orbitron">
+                <a href="#" class="text-2xl font-bold tracking-tight">
                     <span class="gradient-text glow-text">BhanuPrasad</span>
                     <span class="text-xs text-gray-600 ml-1 font-mono">// sec</span>
                 </a>
@@ -607,30 +235,23 @@
         </div>
     </nav>
 
-    <!-- ================================================================ -->
-    <!-- ===== HERO SECTION ===== -->
-    <!-- ================================================================ -->
+    <!-- ===== HERO SECTION - NEW PATTERN & CONTENT ===== -->
     <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 hex-pattern">
         <!-- Animated Background Orbs -->
         <div class="absolute top-10 left-10 w-72 h-72 rounded-full bg-rose-500/10 blur-3xl animate-float"></div>
         <div class="absolute bottom-10 right-10 w-96 h-96 rounded-full bg-violet-500/10 blur-3xl animate-float-reverse"></div>
-        <div class="absolute top-1/2 left-1/4 w-64 h-64 rounded-full bg-blue-500/08 blur-3xl animate-float" style="animation-delay: 2s;"></div>
-        <div class="absolute bottom-1/3 right-1/4 w-80 h-80 rounded-full bg-cyan-500/06 blur-3xl animate-float-reverse" style="animation-delay: 3s;"></div>
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-purple-500/04 blur-3xl animate-pulse-ring"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-blue-500/5 blur-3xl animate-pulse-ring"></div>
 
         <!-- Scanline -->
-        <div class="absolute inset-0 pointer-events-none overflow-hidden opacity-4">
-            <div class="w-full h-[2px] bg-gradient-to-r from-transparent via-rose-500 to-transparent" style="animation: scanline-fade 8s linear infinite;"></div>
-        </div>
-        <div class="absolute inset-0 pointer-events-none overflow-hidden opacity-2" style="animation-delay: 4s;">
-            <div class="w-full h-[1px] bg-gradient-to-r from-transparent via-violet-500 to-transparent" style="animation: scanline-fade 10s linear infinite 2s;"></div>
+        <div class="absolute inset-0 pointer-events-none overflow-hidden opacity-5">
+            <div class="w-full h-[2px] bg-gradient-to-r from-transparent via-rose-500 to-transparent" style="animation: scanline 6s linear infinite;"></div>
         </div>
 
         <div class="container mx-auto px-4 sm:px-6 relative z-10">
             <div class="flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-20">
-                <!-- ===== TEXT CONTENT ===== -->
+                <!-- Text Content - UPDATED -->
                 <div class="w-full lg:w-1/2 text-center lg:text-left">
-                    <div class="inline-block px-5 py-2 rounded-full border border-rose-500/30 bg-rose-500/10 text-rose-400 text-xs font-mono tracking-wider mb-4 animate-float font-orbitron">
+                    <div class="inline-block px-4 py-1.5 rounded-full border border-rose-500/30 bg-rose-500/10 text-rose-400 text-xs font-mono tracking-wider mb-4 animate-float">
                         <i class="fas fa-shield-halved mr-2"></i> CYBERSECURITY ENGINEER
                     </div>
                     <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-4">
@@ -640,30 +261,27 @@
                         <span class="typing-effect">Ethical Hacker · Security Researcher</span>
                     </div>
                     <p class="text-base sm:text-lg text-gray-400 max-w-lg mx-auto lg:mx-0 mb-6 leading-relaxed">
-                        Passionate about <span class="text-rose-400 font-semibold">breaking systems</span> to make them stronger. 
-                        Currently pursuing <span class="text-violet-400 font-semibold">B.Tech in Cybersecurity</span> at Visakha Institute of Engineering & Technology.
+                        Passionate about <span class="text-rose-400">breaking systems</span> to make them stronger. 
+                        Currently pursuing B.Tech in Cybersecurity at Visakha Institute of Engineering & Technology.
                     </p>
-                    
-                    <!-- Stats Cards -->
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-lg mx-auto lg:mx-0 mb-6">
-                        <div class="glass-card rounded-xl p-3 text-center hover:border-rose-500/30 transition-all">
-                            <span class="text-2xl font-bold text-rose-400 font-orbitron">2+</span>
-                            <p class="text-xs text-gray-500 font-mono">Years Learning</p>
+                    <div class="grid grid-cols-2 gap-3 max-w-sm mx-auto lg:mx-0 mb-6">
+                        <div class="glass-card rounded-lg p-3 text-center">
+                            <span class="text-2xl font-bold text-rose-400">2+</span>
+                            <p class="text-xs text-gray-500">Years of Learning</p>
                         </div>
-                        <div class="glass-card rounded-xl p-3 text-center hover:border-violet-500/30 transition-all">
-                            <span class="text-2xl font-bold text-violet-400 font-orbitron">3</span>
-                            <p class="text-xs text-gray-500 font-mono">Projects Built</p>
+                        <div class="glass-card rounded-lg p-3 text-center">
+                            <span class="text-2xl font-bold text-violet-400">3</span>
+                            <p class="text-xs text-gray-500">Projects Built</p>
                         </div>
-                        <div class="glass-card rounded-xl p-3 text-center hover:border-blue-500/30 transition-all">
-                            <span class="text-2xl font-bold text-blue-400 font-orbitron">5+</span>
-                            <p class="text-xs text-gray-500 font-mono">Security Tools</p>
+                        <div class="glass-card rounded-lg p-3 text-center">
+                            <span class="text-2xl font-bold text-blue-400">5+</span>
+                            <p class="text-xs text-gray-500">Security Tools</p>
                         </div>
-                        <div class="glass-card rounded-xl p-3 text-center hover:border-green-500/30 transition-all">
-                            <span class="text-2xl font-bold text-green-400 font-orbitron">8.9</span>
-                            <p class="text-xs text-gray-500 font-mono">GPA (10th)</p>
+                        <div class="glass-card rounded-lg p-3 text-center">
+                            <span class="text-2xl font-bold text-green-400">8.9</span>
+                            <p class="text-xs text-gray-500">GPA (10th Grade)</p>
                         </div>
                     </div>
-
                     <div class="flex flex-wrap gap-4 justify-center lg:justify-start">
                         <a href="#contact" class="group relative px-8 py-3.5 rounded-full bg-gradient-to-r from-rose-500 to-rose-600 text-white font-bold text-sm tracking-wide overflow-hidden transition-all hover:scale-105 hover:shadow-2xl hover:shadow-rose-500/25">
                             <span class="relative z-10">Get In Touch</span>
@@ -673,73 +291,50 @@
                             <i class="fas fa-arrow-right mr-2 group-hover:translate-x-1 transition-transform"></i> My Work
                         </a>
                     </div>
-
                     <div class="flex gap-4 justify-center lg:justify-start mt-6">
-                        <a href="#" class="w-10 h-10 rounded-full glass-card flex items-center justify-center text-gray-400 hover:text-rose-400 hover:border-rose-500/30 hover:shadow-lg hover:shadow-rose-500/10 transition-all">
+                        <a href="#" class="w-10 h-10 rounded-full glass-card flex items-center justify-center text-gray-400 hover:text-rose-400 hover:border-rose-500/30 transition-all">
                             <i class="fab fa-github"></i>
                         </a>
-                        <a href="#" class="w-10 h-10 rounded-full glass-card flex items-center justify-center text-gray-400 hover:text-blue-400 hover:border-blue-500/30 hover:shadow-lg hover:shadow-blue-500/10 transition-all">
+                        <a href="#" class="w-10 h-10 rounded-full glass-card flex items-center justify-center text-gray-400 hover:text-blue-400 hover:border-blue-500/30 transition-all">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
-                        <a href="#" class="w-10 h-10 rounded-full glass-card flex items-center justify-center text-gray-400 hover:text-pink-400 hover:border-pink-500/30 hover:shadow-lg hover:shadow-pink-500/10 transition-all">
+                        <a href="#" class="w-10 h-10 rounded-full glass-card flex items-center justify-center text-gray-400 hover:text-pink-400 hover:border-pink-500/30 transition-all">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="#" class="w-10 h-10 rounded-full glass-card flex items-center justify-center text-gray-400 hover:text-purple-400 hover:border-purple-500/30 hover:shadow-lg hover:shadow-purple-500/10 transition-all">
+                        <a href="#" class="w-10 h-10 rounded-full glass-card flex items-center justify-center text-gray-400 hover:text-purple-400 hover:border-purple-500/30 transition-all">
                             <i class="fab fa-x-twitter"></i>
                         </a>
                     </div>
                 </div>
 
-                <!-- ===== PHOTO WITH NEW BORDERS ===== -->
+                <!-- Avatar with new decorative elements -->
                 <div class="w-full lg:w-1/2 flex justify-center">
                     <div class="relative">
-                        <!-- Outer glow rings -->
-                        <div class="photo-glow-ring"></div>
-                        <div class="photo-glow-ring-2"></div>
-                        
-                        <!-- Photo Frame with animated border -->
-                        <div class="photo-frame">
-                            <!-- Animated rotating rings -->
-                            <div class="photo-ring"></div>
-                            <div class="photo-ring-reverse"></div>
-                            <div class="photo-ring-dots"></div>
-                            
-                            <!-- Inner ring with dots -->
-                            <div class="absolute inset-[-4px] rounded-full">
-                                <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-rose-400/40 animate-pulse"></div>
-                                <div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-2 h-2 rounded-full bg-violet-400/40 animate-pulse" style="animation-delay: 1s;"></div>
-                                <div class="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-blue-400/40 animate-pulse" style="animation-delay: 0.5s;"></div>
-                                <div class="absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/2 w-2 h-2 rounded-full bg-cyan-400/40 animate-pulse" style="animation-delay: 1.5s;"></div>
-                            </div>
+                        <div class="relative w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 animate-morphing">
+                            <!-- Animated Rings -->
+                            <div class="absolute inset-[-8px] rounded-full border border-rose-500/20 animate-pulse-ring"></div>
+                            <div class="absolute inset-[-16px] rounded-full border border-violet-500/10 animate-float" style="animation-delay: 1s;"></div>
+                            <div class="absolute inset-[-24px] rounded-full border border-blue-500/5 animate-float-reverse" style="animation-delay: 2s;"></div>
+                            <div class="absolute inset-[-30px] rounded-full border-2 border-transparent border-t-rose-500 border-r-violet-500 animate-spin" style="animation-duration: 10s;"></div>
+                            <div class="absolute inset-[-30px] rounded-full border-2 border-transparent border-b-blue-500 border-l-rose-500 animate-spin" style="animation-duration: 10s; animation-direction: reverse;"></div>
 
-                            <img src="https://res.cloudinary.com/dhjktmlhs/image/upload/v1741699951/my_photo_z0gb4z.jpg"
+                            <img src="https://res.cloudinary.com/dhjktmlhs/image/upload/v1783764751/IMG-20260412-WA0002.jpg_idkofc.jpg"
                             alt="Bhanu Prasad"
-                            class="w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 rounded-full object-cover border-4 border-black/20 relative z-10 animate-morphing-slow"
+                            class="w-full h-full rounded-full object-cover border-4 border-rose-500/30 shadow-2xl shadow-rose-500/20 relative z-10"
                             />
-                            
-                            <!-- Glitch overlay -->
-                            <div class="absolute inset-0 rounded-full z-20 pointer-events-none mix-blend-screen opacity-0 hover:opacity-15 transition-opacity duration-500"
-                            style="background: repeating-linear-gradient(0deg, rgba(255,0,0,0.08) 0px, rgba(0,0,255,0.08) 2px, transparent 4px, transparent 6px);">
+                            <div class="absolute inset-0 rounded-full z-20 pointer-events-none mix-blend-screen opacity-0 hover:opacity-20 transition-opacity duration-500"
+                            style="background: repeating-linear-gradient(0deg, rgba(255,0,0,0.1) 0px, rgba(0,0,255,0.1) 2px, transparent 4px, transparent 6px);">
                         </div>
-                        
-                        <!-- Status Badge -->
-                        <div class="absolute -bottom-1 -right-1 z-30 flex items-center gap-2 px-3 py-1.5 rounded-full glass-card border border-green-500/30 animate-float">
+                        <div class="absolute -bottom-2 -right-2 z-30 flex items-center gap-2 px-3 py-1.5 rounded-full glass-card border border-green-500/30">
                             <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
                             <span class="text-xs text-green-400 font-mono">Active</span>
                         </div>
-                        
-                        <!-- Decorative Icons -->
-                        <div class="absolute -top-6 -left-6 z-20 text-rose-400/20 text-4xl animate-float">
+                        <!-- New Decorative Elements -->
+                        <div class="absolute -top-4 -left-4 z-20 text-rose-400/30 text-4xl animate-float">
                             <i class="fas fa-shield-halved"></i>
                         </div>
-                        <div class="absolute -bottom-6 -right-6 z-20 text-violet-400/20 text-3xl animate-float-reverse">
+                        <div class="absolute -bottom-4 -right-4 z-20 text-violet-400/30 text-3xl animate-float-reverse">
                             <i class="fas fa-code"></i>
-                        </div>
-                        <div class="absolute top-1/2 -right-8 z-20 text-blue-400/15 text-2xl animate-float" style="animation-delay: 2s;">
-                            <i class="fas fa-lock"></i>
-                        </div>
-                        <div class="absolute top-1/3 -left-8 z-20 text-cyan-400/15 text-2xl animate-float-reverse" style="animation-delay: 1s;">
-                            <i class="fas fa-key"></i>
                         </div>
                     </div>
                 </div>
@@ -748,431 +343,234 @@
     </div>
 </section>
 
-<!-- ================================================================ -->
 <!-- ===== DIVIDER ===== -->
-<!-- ================================================================ -->
 <div class="section-divider"></div>
 
-<!-- ================================================================ -->
-<!-- ===== SKILLS SECTION - CLICKABLE WITH ANIMATIONS ===== -->
-<!-- ================================================================ -->
-<section id="skills" class="relative py-24 overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-rose-500/05 to-transparent pointer-events-none"></div>
-    <div class="absolute inset-0 cyber-grid opacity-30"></div>
+<!-- ===== SKILLS SECTION - CLICKABLE SKILLS WITH DETAILS ===== -->
+<section id="skills" class="relative py-24 overflow-hidden cyber-grid">
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-rose-500/5 to-transparent pointer-events-none"></div>
 
     <div class="container mx-auto px-4 sm:px-6 relative z-10">
-        <!-- Section Header -->
         <div class="text-center mb-16">
-            <span class="inline-block px-5 py-2 rounded-full border border-rose-500/20 bg-rose-500/10 text-rose-400 text-xs font-mono tracking-wider mb-4 animate-float font-orbitron">
+            <span class="inline-block px-4 py-1.5 rounded-full border border-rose-500/20 bg-rose-500/10 text-rose-400 text-xs font-mono tracking-wider mb-4 animate-float">
                 <i class="fas fa-code mr-2"></i> EXPERTISE
             </span>
-            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 font-orbitron">
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
                 <span class="gradient-text">Cybersecurity Arsenal</span>
             </h2>
             <div class="w-24 h-1 bg-gradient-to-r from-rose-500 to-violet-500 mx-auto rounded-full"></div>
-            <p class="mt-6 text-gray-400 max-w-2xl mx-auto">Click on any skill to explore my expertise in detail</p>
+            <p class="mt-6 text-gray-400 max-w-2xl mx-auto">Click on any skill to learn more about my expertise.</p>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-            <!-- ===== LEFT: Clickable Skill Cards ===== -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Clickable Skill Cards - Left Column -->
             <div class="space-y-4">
-                <!-- Python -->
-                <div class="skill-card glass-card-glow rounded-xl p-5 hover:border-blue-500/30 active:border-blue-500/40" data-skill="python">
-                    <div class="skill-glow"></div>
+                <div class="skill-card glass-card rounded-xl p-5 hover:border-rose-500/30" data-skill="python">
                     <div class="flex items-center gap-4">
-                        <div class="skill-icon w-14 h-14 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 text-2xl transition-all">
+                        <div class="w-12 h-12 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 text-xl">
                             <i class="fab fa-python"></i>
                         </div>
                         <div class="flex-1">
                             <h3 class="text-lg font-bold text-white">Python</h3>
-                            <p class="text-sm text-gray-400">Scripting, Automation, Security Tools</p>
+                            <p class="text-sm text-gray-400">Click to learn more →</p>
                         </div>
-                        <div class="skill-arrow text-gray-500 transition-all">
-                            <i class="fas fa-chevron-right"></i>
-                        </div>
-                    </div>
-                    <div class="mt-3 flex gap-2">
-                        <span class="px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 text-xs border border-blue-500/20">90%</span>
-                        <span class="px-2 py-0.5 rounded bg-gray-800 text-gray-400 text-xs">Expert</span>
+                        <div class="text-rose-400/30"><i class="fas fa-chevron-right"></i></div>
                     </div>
                 </div>
 
-                <!-- Burp Suite -->
-                <div class="skill-card glass-card-glow rounded-xl p-5 hover:border-rose-500/30" data-skill="burp">
-                    <div class="skill-glow"></div>
+                <div class="skill-card glass-card rounded-xl p-5 hover:border-rose-500/30" data-skill="burp">
                     <div class="flex items-center gap-4">
-                        <div class="skill-icon w-14 h-14 rounded-full bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-400 text-2xl transition-all">
+                        <div class="w-12 h-12 rounded-full bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-400 text-xl">
                             <i class="fas fa-bug"></i>
                         </div>
                         <div class="flex-1">
                             <h3 class="text-lg font-bold text-white">Burp Suite</h3>
-                            <p class="text-sm text-gray-400">Web Vulnerability Testing</p>
+                            <p class="text-sm text-gray-400">Click to learn more →</p>
                         </div>
-                        <div class="skill-arrow text-gray-500 transition-all">
-                            <i class="fas fa-chevron-right"></i>
-                        </div>
-                    </div>
-                    <div class="mt-3 flex gap-2">
-                        <span class="px-2 py-0.5 rounded bg-rose-500/10 text-rose-400 text-xs border border-rose-500/20">85%</span>
-                        <span class="px-2 py-0.5 rounded bg-gray-800 text-gray-400 text-xs">Advanced</span>
+                        <div class="text-rose-400/30"><i class="fas fa-chevron-right"></i></div>
                     </div>
                 </div>
 
-                <!-- Nmap -->
-                <div class="skill-card glass-card-glow rounded-xl p-5 hover:border-violet-500/30" data-skill="nmap">
-                    <div class="skill-glow"></div>
+                <div class="skill-card glass-card rounded-xl p-5 hover:border-rose-500/30" data-skill="nmap">
                     <div class="flex items-center gap-4">
-                        <div class="skill-icon w-14 h-14 rounded-full bg-violet-500/10 border border-violet-500/20 flex items-center justify-center text-violet-400 text-2xl transition-all">
+                        <div class="w-12 h-12 rounded-full bg-violet-500/10 border border-violet-500/20 flex items-center justify-center text-violet-400 text-xl">
                             <i class="fas fa-network-wired"></i>
                         </div>
                         <div class="flex-1">
                             <h3 class="text-lg font-bold text-white">Nmap</h3>
-                            <p class="text-sm text-gray-400">Network Discovery & Scanning</p>
+                            <p class="text-sm text-gray-400">Click to learn more →</p>
                         </div>
-                        <div class="skill-arrow text-gray-500 transition-all">
-                            <i class="fas fa-chevron-right"></i>
-                        </div>
-                    </div>
-                    <div class="mt-3 flex gap-2">
-                        <span class="px-2 py-0.5 rounded bg-violet-500/10 text-violet-400 text-xs border border-violet-500/20">80%</span>
-                        <span class="px-2 py-0.5 rounded bg-gray-800 text-gray-400 text-xs">Advanced</span>
+                        <div class="text-rose-400/30"><i class="fas fa-chevron-right"></i></div>
                     </div>
                 </div>
 
-                <!-- Kali Linux -->
-                <div class="skill-card glass-card-glow rounded-xl p-5 hover:border-green-500/30" data-skill="kali">
-                    <div class="skill-glow"></div>
+                <div class="skill-card glass-card rounded-xl p-5 hover:border-rose-500/30" data-skill="kali">
                     <div class="flex items-center gap-4">
-                        <div class="skill-icon w-14 h-14 rounded-full bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-400 text-2xl transition-all">
+                        <div class="w-12 h-12 rounded-full bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-400 text-xl">
                             <i class="fab fa-linux"></i>
                         </div>
                         <div class="flex-1">
                             <h3 class="text-lg font-bold text-white">Kali Linux</h3>
-                            <p class="text-sm text-gray-400">Penetration Testing OS</p>
+                            <p class="text-sm text-gray-400">Click to learn more →</p>
                         </div>
-                        <div class="skill-arrow text-gray-500 transition-all">
-                            <i class="fas fa-chevron-right"></i>
-                        </div>
-                    </div>
-                    <div class="mt-3 flex gap-2">
-                        <span class="px-2 py-0.5 rounded bg-green-500/10 text-green-400 text-xs border border-green-500/20">75%</span>
-                        <span class="px-2 py-0.5 rounded bg-gray-800 text-gray-400 text-xs">Intermediate</span>
+                        <div class="text-rose-400/30"><i class="fas fa-chevron-right"></i></div>
                     </div>
                 </div>
 
-                <!-- Wireshark -->
-                <div class="skill-card glass-card-glow rounded-xl p-5 hover:border-yellow-500/30" data-skill="wireshark">
-                    <div class="skill-glow"></div>
+                <div class="skill-card glass-card rounded-xl p-5 hover:border-rose-500/30" data-skill="wireshark">
                     <div class="flex items-center gap-4">
-                        <div class="skill-icon w-14 h-14 rounded-full bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center text-yellow-400 text-2xl transition-all">
+                        <div class="w-12 h-12 rounded-full bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center text-yellow-400 text-xl">
                             <i class="fas fa-chart-line"></i>
                         </div>
                         <div class="flex-1">
                             <h3 class="text-lg font-bold text-white">Wireshark</h3>
-                            <p class="text-sm text-gray-400">Network Packet Analysis</p>
+                            <p class="text-sm text-gray-400">Click to learn more →</p>
                         </div>
-                        <div class="skill-arrow text-gray-500 transition-all">
-                            <i class="fas fa-chevron-right"></i>
-                        </div>
-                    </div>
-                    <div class="mt-3 flex gap-2">
-                        <span class="px-2 py-0.5 rounded bg-yellow-500/10 text-yellow-400 text-xs border border-yellow-500/20">70%</span>
-                        <span class="px-2 py-0.5 rounded bg-gray-800 text-gray-400 text-xs">Intermediate</span>
+                        <div class="text-rose-400/30"><i class="fas fa-chevron-right"></i></div>
                     </div>
                 </div>
 
-                <!-- Web Security -->
-                <div class="skill-card glass-card-glow rounded-xl p-5 hover:border-cyan-500/30" data-skill="websec">
-                    <div class="skill-glow"></div>
+                <div class="skill-card glass-card rounded-xl p-5 hover:border-rose-500/30" data-skill="websec">
                     <div class="flex items-center gap-4">
-                        <div class="skill-icon w-14 h-14 rounded-full bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 text-2xl transition-all">
+                        <div class="w-12 h-12 rounded-full bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 text-xl">
                             <i class="fas fa-shield-halved"></i>
                         </div>
                         <div class="flex-1">
                             <h3 class="text-lg font-bold text-white">Web Security</h3>
-                            <p class="text-sm text-gray-400">OWASP Top 10 & Secure Coding</p>
+                            <p class="text-sm text-gray-400">Click to learn more →</p>
                         </div>
-                        <div class="skill-arrow text-gray-500 transition-all">
-                            <i class="fas fa-chevron-right"></i>
-                        </div>
-                    </div>
-                    <div class="mt-3 flex gap-2">
-                        <span class="px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-400 text-xs border border-cyan-500/20">78%</span>
-                        <span class="px-2 py-0.5 rounded bg-gray-800 text-gray-400 text-xs">Advanced</span>
+                        <div class="text-rose-400/30"><i class="fas fa-chevron-right"></i></div>
                     </div>
                 </div>
             </div>
 
-            <!-- ===== RIGHT: Skill Detail Panels ===== -->
+            <!-- Skill Details - Right Column -->
             <div class="space-y-6">
-                <!-- Python Detail -->
-                <div id="skill-detail-python" class="skill-detail active glass-card-glow rounded-2xl p-6 border border-blue-500/20">
-                    <div class="flex items-center gap-4 mb-5">
-                        <div class="detail-icon w-14 h-14 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-blue-400 text-2xl">
-                            <i class="fab fa-python"></i>
+                <div id="skill-detail-python" class="skill-detail glass-card rounded-xl p-6 border border-blue-500/20">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400">
+                            <i class="fab fa-python text-xl"></i>
                         </div>
-                        <div>
-                            <h3 class="text-2xl font-bold text-white">Python Expertise</h3>
-                            <p class="text-sm text-gray-400">Building security tools & automation</p>
-                        </div>
+                        <h3 class="text-xl font-bold text-white">Python Expertise</h3>
                     </div>
-                    <p class="text-gray-300 leading-relaxed mb-4">I leverage Python for developing robust security solutions, automation scripts, and penetration testing utilities. My proficiency includes:</p>
-                    <ul class="detail-list space-y-3 text-gray-400">
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle text-blue-400 mt-1"></i>
-                            <span><span class="text-white font-medium">Anti-Ransomware Protection</span> — Desktop utility with multi-layer detection and sandbox analysis</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle text-blue-400 mt-1"></i>
-                            <span><span class="text-white font-medium">Network Scanning Tools</span> — Custom port scanners and service enumeration scripts</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle text-blue-400 mt-1"></i>
-                            <span><span class="text-white font-medium">Vulnerability Scanners</span> — Automated detection of common security flaws</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle text-blue-400 mt-1"></i>
-                            <span><span class="text-white font-medium">API Security Testing</span> — REST API fuzzing and authentication testing</span>
-                        </li>
+                    <p class="text-gray-300 leading-relaxed">I use Python for building security tools, automation scripts, and penetration testing utilities. My projects include:</p>
+                    <ul class="mt-3 space-y-2 text-gray-400">
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-blue-400 mt-1"></i> Anti-Ransomware Protection System</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-blue-400 mt-1"></i> Network scanning and analysis tools</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-blue-400 mt-1"></i> Automated vulnerability scanners</li>
                     </ul>
-                    <div class="mt-4 flex flex-wrap gap-2">
-                        <span class="px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-xs border border-blue-500/20">Flask</span>
-                        <span class="px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-xs border border-blue-500/20">PyQt5</span>
-                        <span class="px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-xs border border-blue-500/20">Requests</span>
-                        <span class="px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-xs border border-blue-500/20">BeautifulSoup</span>
-                    </div>
                 </div>
 
-                <!-- Burp Suite Detail -->
-                <div id="skill-detail-burp" class="skill-detail glass-card-glow rounded-2xl p-6 border border-rose-500/20">
-                    <div class="flex items-center gap-4 mb-5">
-                        <div class="detail-icon w-14 h-14 rounded-full bg-rose-500/20 border border-rose-500/30 flex items-center justify-center text-rose-400 text-2xl">
-                            <i class="fas fa-bug"></i>
+                <div id="skill-detail-burp" class="skill-detail glass-card rounded-xl p-6 border border-rose-500/20">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-rose-500/20 flex items-center justify-center text-rose-400">
+                            <i class="fas fa-bug text-xl"></i>
                         </div>
-                        <div>
-                            <h3 class="text-2xl font-bold text-white">Burp Suite Expertise</h3>
-                            <p class="text-sm text-gray-400">Web application security testing</p>
-                        </div>
+                        <h3 class="text-xl font-bold text-white">Burp Suite Expertise</h3>
                     </div>
-                    <p class="text-gray-300 leading-relaxed mb-4">I use Burp Suite for comprehensive web application security assessments, including:</p>
-                    <ul class="detail-list space-y-3 text-gray-400">
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle text-rose-400 mt-1"></i>
-                            <span><span class="text-white font-medium">Traffic Interception</span> — HTTP/HTTPS request modification and analysis</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle text-rose-400 mt-1"></i>
-                            <span><span class="text-white font-medium">Vulnerability Scanning</span> — Automated detection of SQLi, XSS, CSRF, and more</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle text-rose-400 mt-1"></i>
-                            <span><span class="text-white font-medium">Session Management</span> — Authentication bypass and session hijacking testing</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle text-rose-400 mt-1"></i>
-                            <span><span class="text-white font-medium">API Security</span> — REST and GraphQL endpoint security testing</span>
-                        </li>
+                    <p class="text-gray-300 leading-relaxed">I use Burp Suite for web application security testing, including:</p>
+                    <ul class="mt-3 space-y-2 text-gray-400">
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-rose-400 mt-1"></i> Intercepting and modifying HTTP traffic</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-rose-400 mt-1"></i> Vulnerability scanning (SQLi, XSS, CSRF)</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-rose-400 mt-1"></i> Session management and authentication testing</li>
                     </ul>
-                    <div class="mt-4 flex flex-wrap gap-2">
-                        <span class="px-3 py-1 rounded-full bg-rose-500/10 text-rose-400 text-xs border border-rose-500/20">Intruder</span>
-                        <span class="px-3 py-1 rounded-full bg-rose-500/10 text-rose-400 text-xs border border-rose-500/20">Repeater</span>
-                        <span class="px-3 py-1 rounded-full bg-rose-500/10 text-rose-400 text-xs border border-rose-500/20">Scanner</span>
-                        <span class="px-3 py-1 rounded-full bg-rose-500/10 text-rose-400 text-xs border border-rose-500/20">Decoder</span>
-                    </div>
                 </div>
 
-                <!-- Nmap Detail -->
-                <div id="skill-detail-nmap" class="skill-detail glass-card-glow rounded-2xl p-6 border border-violet-500/20">
-                    <div class="flex items-center gap-4 mb-5">
-                        <div class="detail-icon w-14 h-14 rounded-full bg-violet-500/20 border border-violet-500/30 flex items-center justify-center text-violet-400 text-2xl">
-                            <i class="fas fa-network-wired"></i>
+                <div id="skill-detail-nmap" class="skill-detail glass-card rounded-xl p-6 border border-violet-500/20">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-violet-500/20 flex items-center justify-center text-violet-400">
+                            <i class="fas fa-network-wired text-xl"></i>
                         </div>
-                        <div>
-                            <h3 class="text-2xl font-bold text-white">Nmap Expertise</h3>
-                            <p class="text-sm text-gray-400">Network discovery & security auditing</p>
-                        </div>
+                        <h3 class="text-xl font-bold text-white">Nmap Expertise</h3>
                     </div>
-                    <p class="text-gray-300 leading-relaxed mb-4">I utilize Nmap for comprehensive network mapping and vulnerability discovery:</p>
-                    <ul class="detail-list space-y-3 text-gray-400">
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle text-violet-400 mt-1"></i>
-                            <span><span class="text-white font-medium">Port Scanning</span> — SYN, TCP, UDP scanning techniques with service detection</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle text-violet-400 mt-1"></i>
-                            <span><span class="text-white font-medium">OS Fingerprinting</span> — Remote operating system identification</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle text-violet-400 mt-1"></i>
-                            <span><span class="text-white font-medium">NSE Scripts</span> — Custom vulnerability detection and exploitation scripts</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle text-violet-400 mt-1"></i>
-                            <span><span class="text-white font-medium">Network Mapping</span> — Network topology and device discovery</span>
-                        </li>
+                    <p class="text-gray-300 leading-relaxed">I use Nmap for network discovery and security auditing:</p>
+                    <ul class="mt-3 space-y-2 text-gray-400">
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-violet-400 mt-1"></i> Port scanning and service detection</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-violet-400 mt-1"></i> OS fingerprinting and version detection</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-violet-400 mt-1"></i> Vulnerability scanning using NSE scripts</li>
                     </ul>
-                    <div class="mt-4 flex flex-wrap gap-2">
-                        <span class="px-3 py-1 rounded-full bg-violet-500/10 text-violet-400 text-xs border border-violet-500/20">Zenmap</span>
-                        <span class="px-3 py-1 rounded-full bg-violet-500/10 text-violet-400 text-xs border border-violet-500/20">NSE</span>
-                        <span class="px-3 py-1 rounded-full bg-violet-500/10 text-violet-400 text-xs border border-violet-500/20">ARP Scan</span>
-                    </div>
                 </div>
 
-                <!-- Kali Linux Detail -->
-                <div id="skill-detail-kali" class="skill-detail glass-card-glow rounded-2xl p-6 border border-green-500/20">
-                    <div class="flex items-center gap-4 mb-5">
-                        <div class="detail-icon w-14 h-14 rounded-full bg-green-500/20 border border-green-500/30 flex items-center justify-center text-green-400 text-2xl">
-                            <i class="fab fa-linux"></i>
+                <div id="skill-detail-kali" class="skill-detail glass-card rounded-xl p-6 border border-green-500/20">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center text-green-400">
+                            <i class="fab fa-linux text-xl"></i>
                         </div>
-                        <div>
-                            <h3 class="text-2xl font-bold text-white">Kali Linux Expertise</h3>
-                            <p class="text-sm text-gray-400">Penetration testing & security research</p>
-                        </div>
+                        <h3 class="text-xl font-bold text-white">Kali Linux Expertise</h3>
                     </div>
-                    <p class="text-gray-300 leading-relaxed mb-4">I use Kali Linux as my primary platform for security assessments:</p>
-                    <ul class="detail-list space-y-3 text-gray-400">
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle text-green-400 mt-1"></i>
-                            <span><span class="text-white font-medium">Information Gathering</span> — OSINT and reconnaissance techniques</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle text-green-400 mt-1"></i>
-                            <span><span class="text-white font-medium">Wireless Security</span> — Wi-Fi penetration testing and analysis</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle text-green-400 mt-1"></i>
-                            <span><span class="text-white font-medium">Password Cracking</span> — Hash cracking with John the Ripper and Hashcat</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle text-green-400 mt-1"></i>
-                            <span><span class="text-white font-medium">Exploitation Tools</span> — Metasploit framework and custom exploits</span>
-                        </li>
+                    <p class="text-gray-300 leading-relaxed">I use Kali Linux as my primary penetration testing platform:</p>
+                    <ul class="mt-3 space-y-2 text-gray-400">
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-green-400 mt-1"></i> Information gathering and reconnaissance</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-green-400 mt-1"></i> Wireless network security testing</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-green-400 mt-1"></i> Password cracking and exploitation tools</li>
                     </ul>
-                    <div class="mt-4 flex flex-wrap gap-2">
-                        <span class="px-3 py-1 rounded-full bg-green-500/10 text-green-400 text-xs border border-green-500/20">Metasploit</span>
-                        <span class="px-3 py-1 rounded-full bg-green-500/10 text-green-400 text-xs border border-green-500/20">John</span>
-                        <span class="px-3 py-1 rounded-full bg-green-500/10 text-green-400 text-xs border border-green-500/20">Aircrack</span>
-                    </div>
                 </div>
 
-                <!-- Wireshark Detail -->
-                <div id="skill-detail-wireshark" class="skill-detail glass-card-glow rounded-2xl p-6 border border-yellow-500/20">
-                    <div class="flex items-center gap-4 mb-5">
-                        <div class="detail-icon w-14 h-14 rounded-full bg-yellow-500/20 border border-yellow-500/30 flex items-center justify-center text-yellow-400 text-2xl">
-                            <i class="fas fa-chart-line"></i>
+                <div id="skill-detail-wireshark" class="skill-detail glass-card rounded-xl p-6 border border-yellow-500/20">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-yellow-500/20 flex items-center justify-center text-yellow-400">
+                            <i class="fas fa-chart-line text-xl"></i>
                         </div>
-                        <div>
-                            <h3 class="text-2xl font-bold text-white">Wireshark Expertise</h3>
-                            <p class="text-sm text-gray-400">Network packet analysis & troubleshooting</p>
-                        </div>
+                        <h3 class="text-xl font-bold text-white">Wireshark Expertise</h3>
                     </div>
-                    <p class="text-gray-300 leading-relaxed mb-4">I leverage Wireshark for in-depth network traffic analysis:</p>
-                    <ul class="detail-list space-y-3 text-gray-400">
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle text-yellow-400 mt-1"></i>
-                            <span><span class="text-white font-medium">Packet Capture</span> — Real-time traffic capture and filtering</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle text-yellow-400 mt-1"></i>
-                            <span><span class="text-white font-medium">Protocol Analysis</span> — TCP/IP, HTTP, DNS, and custom protocol dissection</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle text-yellow-400 mt-1"></i>
-                            <span><span class="text-white font-medium">Anomaly Detection</span> — Identifying suspicious traffic patterns and attacks</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle text-yellow-400 mt-1"></i>
-                            <span><span class="text-white font-medium">VoIP Analysis</span> — SIP and RTP traffic inspection</span>
-                        </li>
+                    <p class="text-gray-300 leading-relaxed">I use Wireshark for network analysis and troubleshooting:</p>
+                    <ul class="mt-3 space-y-2 text-gray-400">
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-yellow-400 mt-1"></i> Packet capture and analysis</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-yellow-400 mt-1"></i> Network protocol analysis (TCP/IP, HTTP, DNS)</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-yellow-400 mt-1"></i> Identifying network anomalies and attacks</li>
                     </ul>
-                    <div class="mt-4 flex flex-wrap gap-2">
-                        <span class="px-3 py-1 rounded-full bg-yellow-500/10 text-yellow-400 text-xs border border-yellow-500/20">tcpdump</span>
-                        <span class="px-3 py-1 rounded-full bg-yellow-500/10 text-yellow-400 text-xs border border-yellow-500/20">Display Filters</span>
-                        <span class="px-3 py-1 rounded-full bg-yellow-500/10 text-yellow-400 text-xs border border-yellow-500/20">Coloring Rules</span>
-                    </div>
                 </div>
 
-                <!-- Web Security Detail -->
-                <div id="skill-detail-websec" class="skill-detail glass-card-glow rounded-2xl p-6 border border-cyan-500/20">
-                    <div class="flex items-center gap-4 mb-5">
-                        <div class="detail-icon w-14 h-14 rounded-full bg-cyan-500/20 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-2xl">
-                            <i class="fas fa-shield-halved"></i>
+                <div id="skill-detail-websec" class="skill-detail glass-card rounded-xl p-6 border border-cyan-500/20">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-cyan-500/20 flex items-center justify-center text-cyan-400">
+                            <i class="fas fa-shield-halved text-xl"></i>
                         </div>
-                        <div>
-                            <h3 class="text-2xl font-bold text-white">Web Security Expertise</h3>
-                            <p class="text-sm text-gray-400">Web application security & secure coding</p>
-                        </div>
+                        <h3 class="text-xl font-bold text-white">Web Security Expertise</h3>
                     </div>
-                    <p class="text-gray-300 leading-relaxed mb-4">I specialize in securing web applications against modern threats:</p>
-                    <ul class="detail-list space-y-3 text-gray-400">
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle text-cyan-400 mt-1"></i>
-                            <span><span class="text-white font-medium">OWASP Top 10</span> — Comprehensive vulnerability assessment and mitigation</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle text-cyan-400 mt-1"></i>
-                            <span><span class="text-white font-medium">Secure Coding</span> — Writing secure code and code review practices</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle text-cyan-400 mt-1"></i>
-                            <span><span class="text-white font-medium">Security Headers</span> — CSP, HSTS, X-Frame-Options implementation</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-check-circle text-cyan-400 mt-1"></i>
-                            <span><span class="text-white font-medium">Encryption</span> — SSL/TLS, JWT, and data encryption best practices</span>
-                        </li>
+                    <p class="text-gray-300 leading-relaxed">I specialize in securing web applications with:</p>
+                    <ul class="mt-3 space-y-2 text-gray-400">
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-cyan-400 mt-1"></i> OWASP Top 10 vulnerability assessment</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-cyan-400 mt-1"></i> Secure coding practices and code review</li>
+                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-cyan-400 mt-1"></i> Security headers and encryption implementation</li>
                     </ul>
-                    <div class="mt-4 flex flex-wrap gap-2">
-                        <span class="px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 text-xs border border-cyan-500/20">OWASP ZAP</span>
-                        <span class="px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 text-xs border border-cyan-500/20">SQLMap</span>
-                        <span class="px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 text-xs border border-cyan-500/20">JWT</span>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ================================================================ -->
 <!-- ===== DIVIDER ===== -->
-<!-- ================================================================ -->
 <div class="section-divider"></div>
 
-<!-- ================================================================ -->
 <!-- ===== PROJECTS SECTION ===== -->
-<!-- ================================================================ -->
-<section id="projects" class="relative py-24 overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-t from-transparent via-violet-500/05 to-transparent pointer-events-none"></div>
-    <div class="absolute inset-0 cyber-grid opacity-20"></div>
+<section id="projects" class="relative py-24 overflow-hidden cyber-grid">
+    <div class="absolute inset-0 bg-gradient-to-t from-transparent via-violet-500/5 to-transparent pointer-events-none"></div>
 
     <div class="container mx-auto px-4 sm:px-6 relative z-10">
         <div class="text-center mb-16">
-            <span class="inline-block px-5 py-2 rounded-full border border-violet-500/20 bg-violet-500/10 text-violet-400 text-xs font-mono tracking-wider mb-4 animate-float-reverse font-orbitron">
+            <span class="inline-block px-4 py-1.5 rounded-full border border-violet-500/20 bg-violet-500/10 text-violet-400 text-xs font-mono tracking-wider mb-4 animate-float-reverse">
                 <i class="fas fa-folder-open mr-2"></i> PORTFOLIO
             </span>
-            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 font-orbitron">
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
                 <span class="gradient-text">Featured Projects</span>
             </h2>
             <div class="w-24 h-1 bg-gradient-to-r from-violet-500 to-blue-500 mx-auto rounded-full"></div>
-            <p class="mt-6 text-gray-400 max-w-2xl mx-auto">Security tools and innovative solutions I've engineered</p>
+            <p class="mt-6 text-gray-400 max-w-2xl mx-auto">Security tools and innovative solutions I've engineered.</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <!-- Project 1: Anti-Ransomware -->
-            <div class="glass-card-glow rounded-2xl overflow-hidden group">
-                <div class="relative h-52 bg-gradient-to-br from-rose-500/20 to-orange-500/20 flex items-center justify-center overflow-hidden">
-                    <i class="fas fa-shield-halved text-7xl text-rose-400/30 group-hover:text-rose-400/60 transition-all duration-700 group-hover:scale-110 group-hover:rotate-12"></i>
+            <div class="glass-card rounded-2xl overflow-hidden group project-glow">
+                <div class="relative h-48 bg-gradient-to-br from-rose-500/20 to-orange-500/20 flex items-center justify-center overflow-hidden">
+                    <i class="fas fa-shield-halved text-6xl text-rose-400/40 group-hover:text-rose-400/80 transition-all duration-500 group-hover:scale-110"></i>
                     <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent"></div>
                     <div class="absolute top-4 right-4 px-3 py-1 rounded-full bg-rose-500/20 border border-rose-500/30 text-rose-400 text-xs font-mono">
                         <i class="fas fa-code mr-1"></i> PyQt5
                     </div>
-                    <div class="absolute bottom-4 left-4 flex gap-2">
-                        <span class="px-2 py-0.5 rounded bg-black/50 text-rose-400 text-xs backdrop-blur-sm">Security</span>
-                        <span class="px-2 py-0.5 rounded bg-black/50 text-orange-400 text-xs backdrop-blur-sm">Sandbox</span>
-                    </div>
                 </div>
                 <div class="p-6">
-                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-rose-400 transition-colors">Anti-Ransomware Protection</h3>
+                    <h3 class="text-xl font-bold text-white mb-2">Anti-Ransomware Protection</h3>
                     <p class="text-gray-400 text-sm leading-relaxed mb-4">Desktop utility for Windows with multiple detection layers, USB monitoring, and sandbox-based file inspection.</p>
                     <div class="flex flex-wrap gap-2 mb-4">
                         <span class="px-3 py-1 rounded-full bg-gray-800 text-xs text-rose-400 border border-rose-500/20">Python</span>
@@ -1181,26 +579,22 @@
                     </div>
                     <a href="https://github.com/Baddibhanuprasad/Anti-ransomware" target="_blank" class="inline-flex items-center gap-2 text-sm font-medium text-rose-400 hover:text-rose-300 transition group">
                         <i class="fab fa-github"></i> View Repository
-                        <i class="fas fa-arrow-right text-xs group-hover:translate-x-2 transition-transform"></i>
+                        <i class="fas fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
                     </a>
                 </div>
             </div>
 
             <!-- Project 2: SmartHome Automation -->
-            <div class="glass-card-glow rounded-2xl overflow-hidden group">
-                <div class="relative h-52 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 flex items-center justify-center overflow-hidden">
-                    <i class="fas fa-house-chimney text-7xl text-blue-400/30 group-hover:text-blue-400/60 transition-all duration-700 group-hover:scale-110 group-hover:-rotate-12"></i>
+            <div class="glass-card rounded-2xl overflow-hidden group project-glow">
+                <div class="relative h-48 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 flex items-center justify-center overflow-hidden">
+                    <i class="fas fa-house-chimney text-6xl text-blue-400/40 group-hover:text-blue-400/80 transition-all duration-500 group-hover:scale-110"></i>
                     <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent"></div>
                     <div class="absolute top-4 right-4 px-3 py-1 rounded-full bg-blue-500/20 border border-blue-500/30 text-blue-400 text-xs font-mono">
                         <i class="fas fa-microchip mr-1"></i> ESP32
                     </div>
-                    <div class="absolute bottom-4 left-4 flex gap-2">
-                        <span class="px-2 py-0.5 rounded bg-black/50 text-blue-400 text-xs backdrop-blur-sm">IoT</span>
-                        <span class="px-2 py-0.5 rounded bg-black/50 text-cyan-400 text-xs backdrop-blur-sm">Cloud</span>
-                    </div>
                 </div>
                 <div class="p-6">
-                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">SmartHome Automation</h3>
+                    <h3 class="text-xl font-bold text-white mb-2">SmartHome Automation</h3>
                     <p class="text-gray-400 text-sm leading-relaxed mb-4">ESP32 and cloud-based home automation system for controlling appliances anywhere in the world via internet.</p>
                     <div class="flex flex-wrap gap-2 mb-4">
                         <span class="px-3 py-1 rounded-full bg-gray-800 text-xs text-blue-400 border border-blue-500/20">IoT</span>
@@ -1209,26 +603,22 @@
                     </div>
                     <a href="https://github.com/Baddibhanuprasad/SmartHome--automation" target="_blank" class="inline-flex items-center gap-2 text-sm font-medium text-blue-400 hover:text-blue-300 transition group">
                         <i class="fab fa-github"></i> View Repository
-                        <i class="fas fa-arrow-right text-xs group-hover:translate-x-2 transition-transform"></i>
+                        <i class="fas fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
                     </a>
                 </div>
             </div>
 
             <!-- Project 3: Vairquailty -->
-            <div class="glass-card-glow rounded-2xl overflow-hidden group">
-                <div class="relative h-52 bg-gradient-to-br from-violet-500/20 to-purple-500/20 flex items-center justify-center overflow-hidden">
-                    <i class="fas fa-wind text-7xl text-violet-400/30 group-hover:text-violet-400/60 transition-all duration-700 group-hover:scale-110"></i>
+            <div class="glass-card rounded-2xl overflow-hidden group project-glow">
+                <div class="relative h-48 bg-gradient-to-br from-violet-500/20 to-purple-500/20 flex items-center justify-center overflow-hidden">
+                    <i class="fas fa-wind text-6xl text-violet-400/40 group-hover:text-violet-400/80 transition-all duration-500 group-hover:scale-110"></i>
                     <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent"></div>
                     <div class="absolute top-4 right-4 px-3 py-1 rounded-full bg-violet-500/20 border border-violet-500/30 text-violet-400 text-xs font-mono">
                         <i class="fab fa-react mr-1"></i> React Native
                     </div>
-                    <div class="absolute bottom-4 left-4 flex gap-2">
-                        <span class="px-2 py-0.5 rounded bg-black/50 text-violet-400 text-xs backdrop-blur-sm">Mobile</span>
-                        <span class="px-2 py-0.5 rounded bg-black/50 text-purple-400 text-xs backdrop-blur-sm">API</span>
-                    </div>
                 </div>
                 <div class="p-6">
-                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-violet-400 transition-colors">Vairquailty</h3>
+                    <h3 class="text-xl font-bold text-white mb-2">Vairquailty</h3>
                     <p class="text-gray-400 text-sm leading-relaxed mb-4">React Native Expo app for real-time air quality monitoring, pollution data, health recommendations, and alerts.</p>
                     <div class="flex flex-wrap gap-2 mb-4">
                         <span class="px-3 py-1 rounded-full bg-gray-800 text-xs text-violet-400 border border-violet-500/20">React Native</span>
@@ -1237,7 +627,7 @@
                     </div>
                     <a href="https://github.com/Baddibhanuprasad/Vairquailty" target="_blank" class="inline-flex items-center gap-2 text-sm font-medium text-violet-400 hover:text-violet-300 transition group">
                         <i class="fab fa-github"></i> View Repository
-                        <i class="fas fa-arrow-right text-xs group-hover:translate-x-2 transition-transform"></i>
+                        <i class="fas fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
                     </a>
                 </div>
             </div>
@@ -1245,39 +635,32 @@
     </div>
 </section>
 
-<!-- ================================================================ -->
 <!-- ===== DIVIDER ===== -->
-<!-- ================================================================ -->
 <div class="section-divider"></div>
 
-<!-- ================================================================ -->
 <!-- ===== EDUCATION SECTION ===== -->
-<!-- ================================================================ -->
-<section id="education" class="relative py-24 overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-blue-500/05 to-transparent pointer-events-none"></div>
-    <div class="absolute inset-0 cyber-grid opacity-20"></div>
+<section id="education" class="relative py-24 overflow-hidden cyber-grid">
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-blue-500/5 to-transparent pointer-events-none"></div>
 
     <div class="container mx-auto px-4 sm:px-6 relative z-10">
         <div class="text-center mb-16">
-            <span class="inline-block px-5 py-2 rounded-full border border-blue-500/20 bg-blue-500/10 text-blue-400 text-xs font-mono tracking-wider mb-4 animate-float font-orbitron">
+            <span class="inline-block px-4 py-1.5 rounded-full border border-blue-500/20 bg-blue-500/10 text-blue-400 text-xs font-mono tracking-wider mb-4 animate-float">
                 <i class="fas fa-graduation-cap mr-2"></i> ACADEMIC JOURNEY
             </span>
-            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 font-orbitron">
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
                 <span class="gradient-text">Education</span>
             </h2>
             <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 mx-auto rounded-full"></div>
-            <p class="mt-6 text-gray-400 max-w-2xl mx-auto">The foundation that built my cybersecurity expertise</p>
+            <p class="mt-6 text-gray-400 max-w-2xl mx-auto">The foundation that built my cybersecurity expertise.</p>
         </div>
 
         <div class="max-w-4xl mx-auto">
             <div class="relative pl-8 sm:pl-0">
-                <!-- Vertical Glowing Line -->
                 <div class="absolute left-4 sm:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-rose-500 via-violet-500 to-blue-500 transform sm:-translate-x-1/2 shadow-lg shadow-rose-500/20"></div>
 
-                <!-- Item 1 -->
                 <div class="relative flex flex-col sm:flex-row items-start sm:items-center mb-12 sm:mb-16 group">
                     <div class="hidden sm:block sm:w-1/2 sm:pr-12 text-right">
-                        <div class="glass-card-glow rounded-xl p-5 hover:border-rose-500/30 transition-all hover:scale-105">
+                        <div class="glass-card rounded-xl p-5 hover:border-rose-500/30 transition-all hover:scale-105">
                             <span class="text-xs font-mono text-rose-400">2016 – 2021</span>
                             <h4 class="text-lg font-bold text-white mt-1">J.M.J English Medium School</h4>
                             <p class="text-gray-400 text-sm">High School (10th Grade)</p>
@@ -1286,11 +669,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="absolute left-4 sm:left-1/2 transform sm:-translate-x-1/2 w-10 h-10 rounded-full bg-gradient-to-r from-rose-500 to-rose-600 border-4 border-gray-900 z-10 flex items-center justify-center shadow-lg shadow-rose-500/20">
-                        <i class="fas fa-school text-white text-sm"></i>
+                    <div class="absolute left-4 sm:left-1/2 transform sm:-translate-x-1/2 w-8 h-8 rounded-full bg-gradient-to-r from-rose-500 to-rose-600 border-4 border-gray-900 z-10 flex items-center justify-center shadow-lg shadow-rose-500/20">
+                        <i class="fas fa-school text-white text-xs"></i>
                     </div>
                     <div class="sm:hidden w-full pl-8">
-                        <div class="glass-card-glow rounded-xl p-5 hover:border-rose-500/30 transition-all">
+                        <div class="glass-card rounded-xl p-5 hover:border-rose-500/30 transition-all">
                             <span class="text-xs font-mono text-rose-400">2016 – 2021</span>
                             <h4 class="text-lg font-bold text-white mt-1">J.M.J English Medium School</h4>
                             <p class="text-gray-400 text-sm">High School (10th Grade)</p>
@@ -1301,10 +684,9 @@
                     </div>
                 </div>
 
-                <!-- Item 2 -->
                 <div class="relative flex flex-col sm:flex-row items-start sm:items-center mb-12 sm:mb-16 group">
                     <div class="sm:w-1/2 sm:pr-12 order-2 sm:order-1">
-                        <div class="glass-card-glow rounded-xl p-5 hover:border-violet-500/30 transition-all hover:scale-105">
+                        <div class="glass-card rounded-xl p-5 hover:border-violet-500/30 transition-all hover:scale-105">
                             <span class="text-xs font-mono text-violet-400">2021 – 2024</span>
                             <h4 class="text-lg font-bold text-white mt-1">Thandra Paparaya Polytechnic</h4>
                             <p class="text-gray-400 text-sm">Diploma in ECE</p>
@@ -1314,16 +696,15 @@
                             </div>
                         </div>
                     </div>
-                    <div class="absolute left-4 sm:left-1/2 transform sm:-translate-x-1/2 w-10 h-10 rounded-full bg-gradient-to-r from-violet-500 to-violet-600 border-4 border-gray-900 z-10 flex items-center justify-center shadow-lg shadow-violet-500/20">
-                        <i class="fas fa-microchip text-white text-sm"></i>
+                    <div class="absolute left-4 sm:left-1/2 transform sm:-translate-x-1/2 w-8 h-8 rounded-full bg-gradient-to-r from-violet-500 to-violet-600 border-4 border-gray-900 z-10 flex items-center justify-center shadow-lg shadow-violet-500/20">
+                        <i class="fas fa-microchip text-white text-xs"></i>
                     </div>
                     <div class="hidden sm:block sm:w-1/2 sm:pl-12"></div>
                 </div>
 
-                <!-- Item 3 -->
                 <div class="relative flex flex-col sm:flex-row items-start sm:items-center group">
                     <div class="hidden sm:block sm:w-1/2 sm:pr-12 text-right">
-                        <div class="glass-card-glow rounded-xl p-5 hover:border-blue-500/30 transition-all hover:scale-105">
+                        <div class="glass-card rounded-xl p-5 hover:border-blue-500/30 transition-all hover:scale-105">
                             <span class="text-xs font-mono text-blue-400">2024 – Present</span>
                             <h4 class="text-lg font-bold text-white mt-1">Visakha Institute of Engineering</h4>
                             <p class="text-gray-400 text-sm">B.Tech in Cybersecurity</p>
@@ -1333,11 +714,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="absolute left-4 sm:left-1/2 transform sm:-translate-x-1/2 w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 border-4 border-gray-900 z-10 flex items-center justify-center shadow-lg shadow-blue-500/20">
-                        <i class="fas fa-shield-halved text-white text-sm"></i>
+                    <div class="absolute left-4 sm:left-1/2 transform sm:-translate-x-1/2 w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 border-4 border-gray-900 z-10 flex items-center justify-center shadow-lg shadow-blue-500/20">
+                        <i class="fas fa-shield-halved text-white text-xs"></i>
                     </div>
                     <div class="sm:hidden w-full pl-8">
-                        <div class="glass-card-glow rounded-xl p-5 hover:border-blue-500/30 transition-all">
+                        <div class="glass-card rounded-xl p-5 hover:border-blue-500/30 transition-all">
                             <span class="text-xs font-mono text-blue-400">2024 – Present</span>
                             <h4 class="text-lg font-bold text-white mt-1">Visakha Institute of Engineering</h4>
                             <p class="text-gray-400 text-sm">B.Tech in Cybersecurity</p>
@@ -1353,33 +734,27 @@
     </div>
 </section>
 
-<!-- ================================================================ -->
 <!-- ===== DIVIDER ===== -->
-<!-- ================================================================ -->
 <div class="section-divider"></div>
 
-<!-- ================================================================ -->
 <!-- ===== CONTACT SECTION ===== -->
-<!-- ================================================================ -->
-<section id="contact" class="relative py-24 overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-rose-500/05 to-violet-500/05 pointer-events-none"></div>
-    <div class="absolute inset-0 cyber-grid opacity-20"></div>
+<section id="contact" class="relative py-24 overflow-hidden cyber-grid">
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-rose-500/5 to-violet-500/5 pointer-events-none"></div>
 
     <div class="container mx-auto px-4 sm:px-6 relative z-10">
         <div class="text-center mb-16">
-            <span class="inline-block px-5 py-2 rounded-full border border-green-500/20 bg-green-500/10 text-green-400 text-xs font-mono tracking-wider mb-4 animate-float-reverse font-orbitron">
+            <span class="inline-block px-4 py-1.5 rounded-full border border-green-500/20 bg-green-500/10 text-green-400 text-xs font-mono tracking-wider mb-4 animate-float-reverse">
                 <i class="fas fa-paper-plane mr-2"></i> CONNECT
             </span>
-            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 font-orbitron">
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
                 <span class="gradient-text">Get In Touch</span>
             </h2>
             <div class="w-24 h-1 bg-gradient-to-r from-green-500 to-emerald-500 mx-auto rounded-full"></div>
-            <p class="mt-6 text-gray-400 max-w-2xl mx-auto">Open to collaboration, research discussions, and security challenges</p>
+            <p class="mt-6 text-gray-400 max-w-2xl mx-auto">Open to collaboration, research discussions, and security challenges.</p>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            <!-- Contact Info -->
-            <div class="glass-card-glow rounded-2xl p-8 flex flex-col gap-6 hover:border-green-500/20">
+            <div class="glass-card rounded-2xl p-8 flex flex-col gap-6 hover:border-green-500/20">
                 <h3 class="text-2xl font-bold text-white">Contact Details</h3>
                 <div class="flex items-start gap-4 group">
                     <div class="w-12 h-12 rounded-full bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-400 flex-shrink-0 group-hover:shadow-lg group-hover:shadow-rose-500/20 transition-all">
@@ -1409,23 +784,22 @@
                     </div>
                 </div>
                 <div class="flex gap-3 mt-2">
-                    <a href="#" class="w-12 h-12 rounded-full glass-card-glow flex items-center justify-center text-gray-400 hover:text-white hover:border-rose-500/30 hover:shadow-lg hover:shadow-rose-500/10 transition-all">
+                    <a href="#" class="w-12 h-12 rounded-full glass-card flex items-center justify-center text-gray-400 hover:text-white hover:border-rose-500/30 hover:shadow-lg hover:shadow-rose-500/10 transition-all">
                         <i class="fab fa-github"></i>
                     </a>
-                    <a href="#" class="w-12 h-12 rounded-full glass-card-glow flex items-center justify-center text-gray-400 hover:text-white hover:border-blue-500/30 hover:shadow-lg hover:shadow-blue-500/10 transition-all">
+                    <a href="#" class="w-12 h-12 rounded-full glass-card flex items-center justify-center text-gray-400 hover:text-white hover:border-blue-500/30 hover:shadow-lg hover:shadow-blue-500/10 transition-all">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
-                    <a href="#" class="w-12 h-12 rounded-full glass-card-glow flex items-center justify-center text-gray-400 hover:text-white hover:border-pink-500/30 hover:shadow-lg hover:shadow-pink-500/10 transition-all">
+                    <a href="#" class="w-12 h-12 rounded-full glass-card flex items-center justify-center text-gray-400 hover:text-white hover:border-pink-500/30 hover:shadow-lg hover:shadow-pink-500/10 transition-all">
                         <i class="fab fa-instagram"></i>
                     </a>
-                    <a href="#" class="w-12 h-12 rounded-full glass-card-glow flex items-center justify-center text-gray-400 hover:text-white hover:border-purple-500/30 hover:shadow-lg hover:shadow-purple-500/10 transition-all">
+                    <a href="#" class="w-12 h-12 rounded-full glass-card flex items-center justify-center text-gray-400 hover:text-white hover:border-purple-500/30 hover:shadow-lg hover:shadow-purple-500/10 transition-all">
                         <i class="fab fa-x-twitter"></i>
                     </a>
                 </div>
             </div>
 
-            <!-- Contact Form -->
-            <div class="glass-card-glow rounded-2xl p-8 hover:border-violet-500/20">
+            <div class="glass-card rounded-2xl p-8 hover:border-violet-500/20">
                 <h3 class="text-2xl font-bold text-white mb-6">Send a Message</h3>
                 <form class="space-y-5">
                     <div class="relative">
@@ -1449,9 +823,7 @@
     </div>
 </section>
 
-<!-- ================================================================ -->
 <!-- ===== FOOTER ===== -->
-<!-- ================================================================ -->
 <footer class="relative border-t border-white/5 py-8 mt-8 glass">
     <div class="container mx-auto px-4 sm:px-6 text-center">
         <p class="text-gray-500 text-sm font-mono">
@@ -1465,13 +837,10 @@
     </div>
 </footer>
 
-<!-- ================================================================ -->
+<!-- ============================================================ -->
 <!-- ===== SCRIPTS ===== -->
-<!-- ================================================================ -->
 <script>
-    // ================================================================
-    // MOBILE MENU
-    // ================================================================
+    // Mobile Menu
     const menuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
     menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
@@ -1479,19 +848,14 @@
         link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
     });
 
-    // ================================================================
-    // NAVBAR SCROLL
-    // ================================================================
+    // Navbar Scroll
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
         navbar.classList.toggle('bg-gray-900/80', window.scrollY > 50);
         navbar.classList.toggle('shadow-2xl', window.scrollY > 50);
-        navbar.classList.toggle('backdrop-blur-xl', window.scrollY > 50);
     });
 
-    // ================================================================
-    // SKILL CLICK FUNCTIONALITY
-    // ================================================================
+    // ===== SKILL CLICK FUNCTIONALITY =====
     const skillCards = document.querySelectorAll('.skill-card');
     const skillDetails = {
         python: document.getElementById('skill-detail-python'),
@@ -1504,7 +868,7 @@
 
     // Hide all details initially
     Object.values(skillDetails).forEach(detail => {
-        if (detail) detail.classList.remove('active');
+        detail.classList.remove('active');
     });
     // Show first skill by default
     if (skillDetails.python) skillDetails.python.classList.add('active');
@@ -1520,25 +884,20 @@
             
             // Hide all details
             Object.values(skillDetails).forEach(detail => {
-                if (detail) detail.classList.remove('active');
+                detail.classList.remove('active');
             });
             
-            // Show the selected detail with delay for animation
+            // Show the selected detail
             if (skillDetails[skill]) {
-                setTimeout(() => {
-                    skillDetails[skill].classList.add('active');
-                }, 50);
+                skillDetails[skill].classList.add('active');
             }
         });
     });
 
-    // ================================================================
-    // GSAP ANIMATIONS
-    // ================================================================
+    // GSAP Animations
     gsap.registerPlugin(ScrollTrigger);
 
-    // Animate glass cards on scroll
-    gsap.utils.toArray('.glass-card-glow').forEach(card => {
+    gsap.utils.toArray('.glass-card').forEach(card => {
         gsap.from(card, {
             scrollTrigger: {
                 trigger: card,
@@ -1546,118 +905,16 @@
                 toggleActions: 'play none none none'
             },
             opacity: 0,
-            y: 60,
-            duration: 0.9,
-            ease: 'power3.out'
-        });
-    });
-
-    // Animate skill cards with stagger
-    gsap.from('.skill-card', {
-        scrollTrigger: {
-            trigger: '#skills',
-            start: 'top 80%',
-            toggleActions: 'play none none none'
-        },
-        opacity: 0,
-        x: -40,
-        stagger: 0.1,
-        duration: 0.7,
-        ease: 'power2.out'
-    });
-
-    // Animate skill details
-    gsap.from('.skill-detail', {
-        scrollTrigger: {
-            trigger: '#skills',
-            start: 'top 80%',
-            toggleActions: 'play none none none'
-        },
-        opacity: 0,
-        x: 40,
-        duration: 0.7,
-        ease: 'power2.out'
-    });
-
-    // Animate project cards
-    gsap.from('.glass-card-glow.rounded-2xl', {
-        scrollTrigger: {
-            trigger: '#projects',
-            start: 'top 80%',
-            toggleActions: 'play none none none'
-        },
-        opacity: 0,
-        y: 50,
-        stagger: 0.15,
-        duration: 0.8,
-        ease: 'power3.out'
-    });
-
-    // Animate education items
-    gsap.utils.toArray('#education .glass-card-glow').forEach((item, i) => {
-        gsap.from(item, {
-            scrollTrigger: {
-                trigger: item,
-                start: 'top 85%',
-                toggleActions: 'play none none none'
-            },
-            opacity: 0,
-            x: i % 2 === 0 ? -30 : 30,
-            duration: 0.7,
+            y: 50,
+            duration: 0.8,
             ease: 'power2.out'
         });
     });
 
-    // Hero section animations
-    gsap.from('#hero h1', {
-        opacity: 0,
-        y: 40,
-        duration: 1.2,
-        delay: 0.3,
-        ease: 'power3.out'
-    });
-
-    gsap.from('#hero .typing-effect', {
-        opacity: 0,
-        duration: 0.8,
-        delay: 0.6,
-        ease: 'power2.out'
-    });
-
-    gsap.from('#hero .glass-card', {
-        scrollTrigger: {
-            trigger: '#hero',
-            start: 'top bottom',
-            toggleActions: 'play none none none'
-        },
-        opacity: 0,
-        scale: 0.9,
-        stagger: 0.1,
-        duration: 0.6,
-        ease: 'back.out(1.7)'
-    });
-
-    gsap.from('.photo-frame', {
-        scrollTrigger: {
-            trigger: '#hero',
-            start: 'top bottom',
-            toggleActions: 'play none none none'
-        },
-        opacity: 0,
-        scale: 0.8,
-        rotation: 10,
-        duration: 1,
-        ease: 'back.out(1.7)'
-    });
-
-    // ================================================================
-    // 3D PARTICLES (Three.js)
-    // ================================================================
+    // 3D Particles (Three.js)
     (function threeParticles() {
         if (typeof THREE === 'undefined') return;
         const container = document.getElementById('three-container');
-        if (!container) return;
-        
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -1665,91 +922,33 @@
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         container.appendChild(renderer.domElement);
 
-        // Create particle system
         const particlesGeo = new THREE.BufferGeometry();
-        const count = 600;
+        const count = 500;
         const positions = new Float32Array(count * 3);
         const colors = new Float32Array(count * 3);
-        const sizes = new Float32Array(count);
-        
-        for (let i = 0; i < count; i++) {
-            positions[i * 3] = (Math.random() - 0.5) * 50;
-            positions[i * 3 + 1] = (Math.random() - 0.5) * 30;
-            positions[i * 3 + 2] = (Math.random() - 0.5) * 20;
-            
-            const color = new THREE.Color();
-            color.setHSL(0.95 + Math.random() * 0.1, 0.8, 0.5 + Math.random() * 0.2);
-            colors[i * 3] = color.r;
-            colors[i * 3 + 1] = color.g;
-            colors[i * 3 + 2] = color.b;
-            
-            sizes[i] = 0.02 + Math.random() * 0.06;
+        for (let i = 0; i < count * 3; i++) {
+            positions[i] = (Math.random() - 0.5) * 40;
+            colors[i] = Math.random() * 0.5 + 0.3;
         }
-        
         particlesGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
         particlesGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-        particlesGeo.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
 
         const particlesMat = new THREE.PointsMaterial({
             size: 0.08,
             vertexColors: true,
             transparent: true,
-            opacity: 0.6,
+            opacity: 0.5,
             blending: THREE.AdditiveBlending,
-            sizeAttenuation: true
         });
-        
         const particles = new THREE.Points(particlesGeo, particlesMat);
         scene.add(particles);
 
-        // Add a few larger glowing particles
-        const glowGeo = new THREE.BufferGeometry();
-        const glowCount = 30;
-        const glowPos = new Float32Array(glowCount * 3);
-        for (let i = 0; i < glowCount; i++) {
-            glowPos[i * 3] = (Math.random() - 0.5) * 40;
-            glowPos[i * 3 + 1] = (Math.random() - 0.5) * 25;
-            glowPos[i * 3 + 2] = (Math.random() - 0.5) * 15;
-        }
-        glowGeo.setAttribute('position', new THREE.BufferAttribute(glowPos, 3));
-        
-        const glowMat = new THREE.PointsMaterial({
-            size: 0.3,
-            color: 0x8b5cf6,
-            transparent: true,
-            opacity: 0.15,
-            blending: THREE.AdditiveBlending,
-            sizeAttenuation: true
-        });
-        const glowParticles = new THREE.Points(glowGeo, glowMat);
-        scene.add(glowParticles);
-
-        camera.position.z = 12;
-
-        let mouseX = 0;
-        let mouseY = 0;
-        let targetX = 0;
-        let targetY = 0;
-
-        document.addEventListener('mousemove', (event) => {
-            mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-            mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
-        });
+        camera.position.z = 10;
 
         function animate() {
             requestAnimationFrame(animate);
-            
-            targetX += (mouseX * 0.3 - targetX) * 0.02;
-            targetY += (mouseY * 0.3 - targetY) * 0.02;
-            
             particles.rotation.x += 0.0002;
             particles.rotation.y += 0.0004;
-            particles.rotation.x += targetY * 0.0005;
-            particles.rotation.y += targetX * 0.0005;
-            
-            glowParticles.rotation.x = particles.rotation.x * 0.8;
-            glowParticles.rotation.y = particles.rotation.y * 0.8;
-            
             renderer.render(scene, camera);
         }
         animate();
@@ -1760,41 +959,6 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
     })();
-
-    // ================================================================
-    // PARALLAX EFFECT ON HERO ORBS
-    // ================================================================
-    document.addEventListener('mousemove', (e) => {
-        const x = e.clientX / window.innerWidth;
-        const y = e.clientY / window.innerHeight;
-        
-        const orbs = document.querySelectorAll('.hex-pattern .absolute');
-        orbs.forEach((orb, index) => {
-            const speed = 10 + index * 5;
-            const moveX = (x - 0.5) * speed;
-            const moveY = (y - 0.5) * speed;
-            orb.style.transform = `translate(${moveX}px, ${moveY}px)`;
-        });
-    });
-
-    // ================================================================
-    // SMOOTH SCROLL FOR NAV LINKS
-    // ================================================================
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-    });
-
-    console.log('🚀 Portfolio loaded successfully!');
-    console.log('🔒 Bhanu Prasad - Cybersecurity Engineer');
 </script>
 
 </body>
